@@ -68,6 +68,7 @@ h2, h3 {
 #portfolio {
     list-style-type: none;
     padding-left: 0;
+}
 /* portfolio styles */
 .content h1 {
     color: black;
@@ -92,5 +93,5 @@ h2, h3 {
 #portfolio a {
     text-decoration: none;
     color: #454545;
-}}
+}
 
