@@ -3,9 +3,11 @@ body {
 }
 
 canvas {
-  background-color: lightgray;
+  background-color: rgba(0, 150, 150, 0.377);
 }
 
 img {
-  display: none;
+  display: none
+
+  
 }
