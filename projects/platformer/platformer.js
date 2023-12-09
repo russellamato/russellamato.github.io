@@ -60,7 +60,7 @@ $(function () {
     // Your wall choices are: 'top' 'left' 'right' and 'bottom'
     // example usage: createCannon(side, position, delay, width, height)
     
-    createPlatform(50, 600, 20, .0002)
+    createPlatform(50, 600, 20, 50)
     createPlatform(200, 600, 20, 50)
     createPlatform(300, 550, 20, 50)
     createPlatform(600, 575, 100, 10)
@@ -68,13 +68,13 @@ $(function () {
     createPlatform(600, 400, 100, 20)
     createPlatform(450, 300, 40, 20)
     createPlatform(300, 200, 100, 5)
+    createPlatform(200, 390, 100, 20)
 
-
-    createCollectable("minecraftDiamond", 500, 300, .009, 1.3);
+    createCollectable("mothwingCloak", 500, 300, .009, 1.3);
     createCollectable("crystalHeart", 810, 400, .2, .2);
-    createCollectable("geometry", 600, 300, .2, .2);
-    createCollectable("ultrakill", 300, 100, .3, .3)
-    createCollectable("celeste", 100, 100, 0, 0)
+    createCollectable("mantisClaw", 600, 300, .2, .2);
+    createCollectable("ismasTear", 300, 100, .3, .3)
+    createCollectable("monarchWings", 100, 100, 0, 0)
 
 
     createCannon("left",  675, 5);
@@ -83,6 +83,12 @@ $(function () {
     createCannon("bottom", 850, 2000);
     createCannon("left", 512, 2200)
     createCannon("bottom", 200, 2000)
+    createCannon("top", 600, 2100)
+    createCannon("top", 600, 6200)
+    createCannon("bottom", 100, 8700)
+   
+   
+   
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
     /////////////////////////////////////////////////
