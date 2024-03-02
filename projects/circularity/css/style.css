@@ -1,0 +1,10 @@
+body {
+    /* THE BACKGROUND IMAGE IS RIGHT HERE */
+   background-image: url("/projects/circularity/img/download.jpg"); 
+    background-color: #cccccc;
+       
+        -webkit-background-size: cover;
+       -moz-background-size: cover;
+       -o-background-size: cover;
+       background-size: cover;
+}
