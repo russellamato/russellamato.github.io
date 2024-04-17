@@ -38,11 +38,11 @@ var makeLevelData = function (window) {
           { type: "obstacle", x: 1800, y: groundY, damage: 50, img:"img/Road Spikes.png", sizeOfHitZone: 25, scaleX: .25, scaleY: .25, obstacleImageX: -25, obstacleImageY: -25 },//data for a obstacle that is a function call in runLevel.js 
           { type: "obstacle", x: 2000, y: groundY - 125, damage: 50, img:"img/BAD BTD.png", sizeOfHitZone: 25, scaleX: .25, scaleY: .25, obstacleImageX: -25, obstacleImageY: -25 },//data for a obstacle that is a function call in runLevel.js 
           { type: "enemy", x: 4300, y: groundY - 110, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
-          { type: "enemy", x: 4500, y: groundY - 10, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
-          { type: "enemy", x: 4700, y: groundY - 110, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
-          { type: "enemy", x: 4900, y: groundY - 10, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
-          { type: "enemy", x: 5100, y: groundY - 110, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
-          { type: "reward", x: 5300, y: groundY - 10, healthGiven: 50, img:"img/monkey money.png" , rewardImageX: -35, rewardImageY: -30, scoreIncrease: 500, speed: -2, scalingX: .5, scalingY: .5},//data for a enemy that is a function call in runLevel.js 
+          { type: "enemy", x: 4600, y: groundY - 10, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
+          { type: "enemy", x: 4900, y: groundY - 110, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
+          { type: "enemy", x: 5200, y: groundY - 10, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
+          { type: "enemy", x: 5500, y: groundY - 110, damage: -50, img:"img/bloon popper.png", enemyImageX: -25, enemyImageY: -25, speed: -4, scoreIncrease: 200, scalingX: 1, scalingY: 1},//data for a enemy that is a function call in runLevel.js 
+          { type: "reward", x: 5800, y: groundY - 10, healthGiven: 50, img:"img/monkey money.png" , rewardImageX: -35, rewardImageY: -30, scoreIncrease: 500, speed: -2, scalingX: .5, scalingY: .5},//data for a reward that is a function call in runLevel.js 
         ],
       },
     ];
