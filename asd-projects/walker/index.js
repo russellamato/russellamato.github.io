@@ -10,9 +10,43 @@ function runProgram(){
   // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+  const BOARD_WIDTH = $("#board").width();
+  const BOARD_HEIGHT = $("#board").height();
+  const PLAYER_WIDTH = $(".player").width();
+  const PLAYER_HEIGHT = $(".player").height();
+ 
+
+
+  const KEY = {
+    ENTER: 13,
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40,
+    W: 87,
+    A: 65,
+    S: 83,
+    D: 68,
+
+//  SPACE: 32
+};
   
   // Game Item Objects
+  let player1 = {
+      id: "#player1",
+      x: 0, 
+      y: 0,
+      speedX: 0,
+      speedY: 0
+  }
 
+  let player2 = {
+      id: "#player2",
+      x: BOARD_WIDTH - PLAYER_WIDTH, 
+      y: BOARD_HEIGHT - PLAYER_HEIGHT,
+      speedX: 0,
+      speedY: 0
+  }
 
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -23,7 +57,8 @@ function runProgram(){
 
   Note: You can have multiple event listeners for different types of events.
   */
-  $(document).on('eventType', handleEvent);                          
+  $(document).on('keydown', handleKeyDown);                          
+  $(document).on('keyup', handleKeyUp);
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -34,9 +69,22 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
+    repositionGameItem(player1)
+    repositionGameItem(player2)
 
+    wallCollision(player1)
+    wallCollision(player2)
+
+    redrawGameItem(player1)
+    redrawGameItem(player2)
+
+    if (doCollide(player1, player2)){
+      colorChange()
+      console.log("Tag!")
+    }
   }
+
+
   
   /* 
   This section is where you set up the event handlers for user input.
@@ -44,15 +92,104 @@ function runProgram(){
   
   Note: You can have multiple event handlers for different types of events.
   */
-  function handleEvent(event) {
+function handleKeyDown(event) {
+  if (event.which === KEY.LEFT) {
+    player2.speedX = -5;
+    player2.speedY = 0;
+  }else if (event.which === KEY.RIGHT) {
+    player2.speedX = 5;
+    player2.speedY = 0;
+  }else if (event.which === KEY.UP) {
+    player2.speedY = -5;
+    player2.speedX = 0;
+  }else if (event.which === KEY.DOWN) {
+    player2.speedY = 5;
+    player2.speedX = 0;
+  }
+  
+  if (event.which === KEY.A) {
+    player1.speedX = -5;
+    player1.speedY = 0;
+  }else if (event.which === KEY.D) {
+    player1.speedX = 5;
+    player1.speedY = 0;
+  }else if (event.which === KEY.W) {
+    player1.speedY = -5;
+    player1.speedX = 0;
+  }else if (event.which === KEY.S) {
+    player1.speedY = 5;
+    player1.speedX = 0;
+  }
+  /*
+  if (event.which === KEY.SPACE){
 
   }
+  */
+}
+  
+
+
+
+
+
+function handleKeyUp(event) {
+  if (event.which === KEY.LEFT || event.which === KEY.RIGHT) {
+    player2.speedX = 0;
+  }else if (event.which === KEY.UP || event.which === KEY.DOWN) {
+    player2.speedY = 0;
+  } 
+  
+  if (event.which === KEY.A || event.which === KEY.D) {
+    player1.speedX = 0;
+  }else if (event.which === KEY.W || event.which === KEY.S) {
+    player1.speedY = 0;
+  } 
+
+}
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
   
+  function wallCollision(player){
+    if (player.x < 0 || player.x > BOARD_WIDTH - PLAYER_WIDTH) {
+      player.x -= player.speedX; 
+    }else if(player.y < 0 || player.y > BOARD_HEIGHT - PLAYER_HEIGHT){
+      player.y -= player.speedY;
+    }
+
+  }
+ 
+  
+  function repositionGameItem(player){
+    player.x += player.speedX
+    player.y += player.speedY 
+    
+  }
+
+  function redrawGameItem(player){
+     $(player.id).css("left", player.x);
+     $(player.id).css("top", player.y);
+  }
+
+  function doCollide(a, b){
+    return (
+      a.x < b.x + PLAYER_WIDTH &&
+      a.x + PLAYER_WIDTH > b.x && 
+      a.y < b.y + PLAYER_HEIGHT &&
+      a.y + PLAYER_HEIGHT > b.y
+    )
+  } 
+
+  function colorChange(){
+    var randomColor = "#000000".replace(/0/g, function () {
+    return (~~(Math.random() * 16)).toString(16);
+    });
+
+    $("#board").css("background-color", randomColor);
+  }
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);

@@ -163,8 +163,7 @@ function moveBodyAToBodyB (bodyA, bodyB){
   bodyA.row = bodyB.row;
   bodyA.column = bodyB.column;
   bodyA.direction = bodyB.direction;
-  console.log("Moving body A to body B...");
-
+  
 }
 
 
@@ -213,6 +212,22 @@ function handleAppleCollision() {
   var column = snake.tail.column;
   
   makeSnakeSquare(row, column);
+  if (score % 10 === 0 && score !== 0){
+    isReversed = true;
+  }
+  
+  
+  if (isReversed === true){
+    if (activeKey === KEY.LEFT) {
+    snake.head.direction = "right";
+  }else if (activeKey === KEY.RIGHT){
+    snake.head.direction = "left";
+  }else if (activeKey === KEY.UP){
+    snake.head.direction = "down";
+  }else if (activeKey === KEY.DOWN){
+    snake.head.direction = "up";
+  }
+  }
 }
 
 function hasCollidedWithSnake() {
@@ -322,7 +337,7 @@ function makeSnakeSquare(row, column) {
 function handleKeyDown(event) {
   // TODO 7: make the handleKeyDown function register which key is pressed
   activeKey = event.which;
-  console.log(activeKey);
+
 
   // If a valid direction key is pressed, start the game
   if (
@@ -377,6 +392,7 @@ function getRandomAvailablePosition() {
   return randomPosition;
 }
 
+var isReversed = false;
 
 
 function calculateHighScore() {
