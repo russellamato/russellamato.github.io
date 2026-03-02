@@ -6,9 +6,10 @@ body {
 #board {
   width: 440px;
   height: 440px;
-  border: 1px solid white;
+  border: 12px solid rgb(76, 71, 71);
   background-color: rgb(0, 0, 0);
   position: relative;
+  margin: 0 auto;
 }
 
 
@@ -19,10 +20,11 @@ body {
 };
 
 
+
 #player1 {
-  background-color: teal;
+  background-image: url(smallBooyaHorse.jpeg);
 }
+
 #player2 {
-  background-color: rgb(241, 200, 14);
-  
+  background-image: url(smallRoss.png);
 }

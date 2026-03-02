@@ -16,13 +16,13 @@ function runProgram(){
   const PLAYER_HEIGHT = $(".player").height();
  
 
-
   const KEY = {
     ENTER: 13,
     LEFT: 37,
     UP: 38,
     RIGHT: 39,
     DOWN: 40,
+    
     W: 87,
     A: 65,
     S: 83,
@@ -79,7 +79,7 @@ function runProgram(){
     redrawGameItem(player2)
 
     if (doCollide(player1, player2)){
-      colorChange()
+      colorChange();
       console.log("Tag!")
     }
   }
@@ -92,6 +92,8 @@ function runProgram(){
   
   Note: You can have multiple event handlers for different types of events.
   */
+
+  //handles when your pressing down on a key and gives player2 and player1 movement by moving assigning keyboard keys to movement and stops the cubes from going diagonal.
 function handleKeyDown(event) {
   if (event.which === KEY.LEFT) {
     player2.speedX = -5;
@@ -131,7 +133,7 @@ function handleKeyDown(event) {
 
 
 
-
+// Handles player2 and player1 and makes sure it stops movement once the key is no longer being pressed.
 function handleKeyUp(event) {
   if (event.which === KEY.LEFT || event.which === KEY.RIGHT) {
     player2.speedX = 0;
@@ -152,7 +154,7 @@ function handleKeyUp(event) {
   ////////////////////////////////////////////////////////////////////////////////
 
   
-  function wallCollision(player){
+  function wallCollision(player){ //Checks for collisions with the board for the player and if it detects it, it stops you. 
     if (player.x < 0 || player.x > BOARD_WIDTH - PLAYER_WIDTH) {
       player.x -= player.speedX; 
     }else if(player.y < 0 || player.y > BOARD_HEIGHT - PLAYER_HEIGHT){
@@ -162,18 +164,18 @@ function handleKeyUp(event) {
   }
  
   
-  function repositionGameItem(player){
+  function repositionGameItem(player){//adds the speed to the position allowing for movement through continously adding speed from the handleKeyDown() function.
     player.x += player.speedX
     player.y += player.speedY 
     
   }
 
-  function redrawGameItem(player){
+  function redrawGameItem(player){ //
      $(player.id).css("left", player.x);
      $(player.id).css("top", player.y);
   }
 
-  function doCollide(a, b){
+  function doCollide(a, b){ // When called it checks for the x and y values of both objects and compares them, becoming true if they are overlapping.
     return (
       a.x < b.x + PLAYER_WIDTH &&
       a.x + PLAYER_WIDTH > b.x && 
@@ -182,7 +184,7 @@ function handleKeyUp(event) {
     )
   } 
 
-  function colorChange(){
+  function colorChange(){ //gets a random color and then applys it to the board in css, later used to make the board become different colors when the cubes touch. 
     var randomColor = "#000000".replace(/0/g, function () {
     return (~~(Math.random() * 16)).toString(16);
     });
@@ -199,3 +201,6 @@ function handleKeyUp(event) {
   }
   
 }
+
+
+
