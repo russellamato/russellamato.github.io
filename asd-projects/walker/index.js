@@ -80,6 +80,9 @@ function runProgram(){
 
     if (doCollide(player1, player2)){
       colorChange();
+      endGame();
+      runProgram();
+      
       console.log("Tag!")
     }
   }
@@ -98,29 +101,37 @@ function handleKeyDown(event) {
   if (event.which === KEY.LEFT) {
     player2.speedX = -5;
     player2.speedY = 0;
+    $("#player2").css("background-image", "url(smallRossLeft.png)");
   }else if (event.which === KEY.RIGHT) {
     player2.speedX = 5;
     player2.speedY = 0;
+    $("#player2").css("background-image", "url(smallRossRight.png)");
   }else if (event.which === KEY.UP) {
     player2.speedY = -5;
     player2.speedX = 0;
+    $("#player2").css("background-image", "url(smallRossUp.png)");
   }else if (event.which === KEY.DOWN) {
     player2.speedY = 5;
     player2.speedX = 0;
+    $("#player2").css("background-image", "url(smallRoss.png)");
   }
   
   if (event.which === KEY.A) {
     player1.speedX = -5;
     player1.speedY = 0;
+    $("#player1").css("background-image", "url(smallBooyahHorseLeft.png)");
   }else if (event.which === KEY.D) {
     player1.speedX = 5;
     player1.speedY = 0;
+    $("#player1").css("background-image", "url(smallBooyahHorseRight.png)");
   }else if (event.which === KEY.W) {
     player1.speedY = -5;
     player1.speedX = 0;
+    $("#player1").css("background-image", "url(smallBooyahHorseUp.png)");
   }else if (event.which === KEY.S) {
     player1.speedY = 5;
     player1.speedX = 0;
+    $("#player1").css("background-image", "url(smallBooyahHorse.jpeg)");
   }
   /*
   if (event.which === KEY.SPACE){
@@ -137,14 +148,18 @@ function handleKeyDown(event) {
 function handleKeyUp(event) {
   if (event.which === KEY.LEFT || event.which === KEY.RIGHT) {
     player2.speedX = 0;
+    $("#player2").css("background-image", "url(smallRoss.png)");
   }else if (event.which === KEY.UP || event.which === KEY.DOWN) {
     player2.speedY = 0;
+    $("#player2").css("background-image", "url(smallRoss.png)");
   } 
   
   if (event.which === KEY.A || event.which === KEY.D) {
     player1.speedX = 0;
+    $("#player1").css("background-image", "url(smallBooyahHorse.jpeg)");
   }else if (event.which === KEY.W || event.which === KEY.S) {
     player1.speedY = 0;
+    $("#player1").css("background-image", "url(smallBooyahHorse.jpeg)");
   } 
 
 }
@@ -191,6 +206,10 @@ function handleKeyUp(event) {
 
     $("#board").css("background-color", randomColor);
   }
+
+  
+  
+
 
   function endGame() {
     // stop the interval timer
