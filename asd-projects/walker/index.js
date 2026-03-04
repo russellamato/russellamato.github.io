@@ -14,7 +14,7 @@ function runProgram(){
   const BOARD_HEIGHT = $("#board").height();
   const PLAYER_WIDTH = $(".player").width();
   const PLAYER_HEIGHT = $(".player").height();
- 
+  var gravityStrength = 4;
 
   const KEY = {
     ENTER: 13,
@@ -28,8 +28,9 @@ function runProgram(){
     S: 83,
     D: 68,
 
-//  SPACE: 32
-};
+    SPACE: 32,
+    LEFTCTRL: 17
+  };
   
   // Game Item Objects
   let player1 = {
@@ -71,6 +72,9 @@ function runProgram(){
   function newFrame() {
     repositionGameItem(player1)
     repositionGameItem(player2)
+    
+    gravity(player1)
+    gravity(player2)
 
     wallCollision(player1)
     wallCollision(player2)
@@ -83,7 +87,7 @@ function runProgram(){
       endGame();
       runProgram();
       
-      console.log("Tag!")
+      
     }
   }
 
@@ -168,12 +172,16 @@ function handleKeyUp(event) {
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
+  function gravity (player){
+      player.y += gravityStrength;
+  }
   
   function wallCollision(player){ //Checks for collisions with the board for the player and if it detects it, it stops you. 
     if (player.x < 0 || player.x > BOARD_WIDTH - PLAYER_WIDTH) {
       player.x -= player.speedX; 
+      player.y -= player.speedY + gravityStrength;
     }else if(player.y < 0 || player.y > BOARD_HEIGHT - PLAYER_HEIGHT){
-      player.y -= player.speedY;
+      player.y -= player.speedY + gravityStrength;
     }
 
   }
@@ -207,7 +215,7 @@ function handleKeyUp(event) {
     $("#board").css("background-color", randomColor);
   }
 
-  
+
   
 
 
