@@ -14,7 +14,7 @@ function runProgram(){
   const BOARD_HEIGHT = $("#board").height();
   const PLAYER_WIDTH = $(".player").width();
   const PLAYER_HEIGHT = $(".player").height();
-  var gravityStrength = 4;
+  var gravityStrength = 3;
 
   const KEY = {
     ENTER: 13,
@@ -28,8 +28,8 @@ function runProgram(){
     S: 83,
     D: 68,
 
-    SPACE: 32,
-    LEFTCTRL: 17
+   // SPACE: 32,
+   // LEFTCTRL: 17
   };
   
   // Game Item Objects
@@ -48,10 +48,10 @@ function runProgram(){
       speedX: 0,
       speedY: 0
   }
-
+  $("#player1").css("background-image", "url(smallBooyahHorse.jpeg)");
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
-
+  
   /* 
   This section is where you set up event listeners for user input.
   For example, if you wanted to handle a click event on the document, you would replace 'eventType' with 'click', and if you wanted to execute a function named 'handleClick', you would replace 'handleEvent' with 'handleClick'.
