@@ -44,6 +44,7 @@ function render(element, image){
     for (var c = 0; c < image[r].length; c++) {
       var color = image[r][c];
       
+      
       $("<div>").appendTo(element)
               .addClass("square")
               .css('left', c * SQUARE_SIZE)
@@ -81,3 +82,5 @@ function reset() {
     }
   }
 }
+
+
