@@ -77,18 +77,16 @@ function keepInBounds(num){
 // TODO 4: Create reddify filter function
 function reddify(pixelArray){
   pixelArray[RED] = 200;
-  keepInBounds(pixelArray)
+  
 }
 
 // TODO 7 & 8: Create more filter functions
 function decreaseBlue (pixelArray){
-  pixelArray[BLUE] = 50;
-  keepInBounds(pixelArray)
+  pixelArray[BLUE] = keepInBounds(pixelArray[BLUE] -= 50)
 }
 
 function increaseGreenByBlue (pixelArray){
-  pixelArray[GREEN] += pixelArray[BLUE];
-  keepInBounds(pixelArray)
+  pixelArray[GREEN] = keepInBounds(pixelArray[GREEN] += pixelArray[BLUE])
 }
 
 // CHALLENGE code goes below here
