@@ -10,9 +10,22 @@ function runProgram(){
   // Constant Variables
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  
-  // Game Item Objects
+  const BOARD_HEIGHT = $("#board").height();
+  const BOARD_WIDTH = $("#board").width();
 
+  // Game Item Objects
+  function newObj (id, x, y, speedX, speedY, score){
+    return {
+      id,
+      x,
+      y,
+      speedX,
+      speedY,
+      score
+    }
+  }
+  var player1 = newObj("#player1", 5, 5, 5, 5, 5)
+  var $player1 = newObj
 
   // one-time setup
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
@@ -28,7 +41,6 @@ function runProgram(){
   */
   function newFrame() {
     
-
   }
   
   /* 
