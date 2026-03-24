@@ -1,21 +1,59 @@
 
 body {
-  background-color: darkgreen;
+  background-color: rgb(42, 81, 42);
 }
 
 #board {
   width: 440px;
   height: 440px;
   border: 1px solid white;
-  background-color: black;
-  position: relative;
+  background-color: rgb(109, 103, 103);
+  margin: auto;
+  text-align: center;
+  position: relative; 
 }
 
-#gameItem {
-  background-color: teal;
-  width: 50px;
-  height: 50px;
+.ball {
+  border-radius: 20px;
+}
+
+
+#ball1 {
+  background-color: white;
   position: absolute;
+  top: 150px;
+  left: 150px;
+}
+
+
+.paddle {
+  background-color: white;
+  border-radius: 20px;
+}
+
+
+#paddle1 {
+  position: absolute;
+}
+
+#paddle2 {
+  position: absolute;
+}
+
+.score {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+
+#score1 {
+  background-color: white;
+  top: 50px;
   left: 100px;
-  top: 100px; 
+}
+
+#score2 { 
+  background-color: white;
+  top: 50px;
+  left: 325px;
 }
