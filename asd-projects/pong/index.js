@@ -15,7 +15,7 @@ function runProgram(){
   const PADDLE_HEIGHT = $(".paddle").height();
   const PADDLE_WIDTH = $(".paddle").width();
   const INITAL_SPEED = 0;
-  const POINTS_TO_WIN = 2;
+  const POINTS_TO_WIN = 11;
   const HALF_BOARD_WIDTH = $("#board").width() / 2;
   const PADDLE_SPEED_UP = -5;
   const PADDLE_SPEED_DOWN = 5;
