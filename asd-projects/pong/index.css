@@ -1,59 +1,119 @@
 
 body {
-  background-color: rgb(42, 81, 42);
+  background-image: url(img/inconspicous_background.png);
+  background-size: 114%;
+}
+
+@font-face {
+  font-family: NFPARKLANE;
+  src: url(fonts/Park_Lane_NF.ttf)
 }
 
 #board {
   width: 440px;
   height: 440px;
-  border: 1px solid white;
-  background-color: rgb(109, 103, 103);
+  border: 10px solid rgb(240, 255, 72);
+  background-color: rgb(221, 255, 143);
   margin: auto;
   text-align: center;
   position: relative; 
 }
 
 .ball {
-  border-radius: 20px;
+  position: absolute;
 }
 
 
 #ball1 {
-  background-color: white;
-  position: absolute;
+  background-image: url(img/black&white.png);
+  background-size: 100%;
+  width:20px; 
+  height:20px;
+  border-radius: 10px;
   top: 150px;
   left: 150px;
 }
 
 
 .paddle {
-  background-color: white;
   border-radius: 20px;
+  position: absolute;
+  width: 20px;
+  height: 80px;
 }
 
 
-#paddle1 {
-  position: absolute;
+#paddleLeft {
+  background-color: rgb(255, 255, 255);
+  top: 0px;
+  left: 0px;
 }
 
-#paddle2 {
-  position: absolute;
+#paddleRight {
+  background-color: rgb(0, 0, 0);
+  top: 360px;
+  left: 420px;
 }
 
 .score {
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
   position: absolute;
+  font-family: NFPARKLANE;
+  font-size: 45px
 }
 
-#score1 {
-  background-color: white;
-  top: 50px;
-  left: 100px;
+#scoreLeft {
+  top: 10px;
+  left: 110px;
+
 }
 
-#score2 { 
-  background-color: white;
-  top: 50px;
-  left: 325px;
+#scoreRight { 
+  top: 10px;
+  left: 285px;
 }
+
+.name {
+  position: absolute;
+  font-family: NFPARKLANE;
+  font-size: 20px
+}
+
+#nameLeft{
+  top: 5px;
+  left: 0px;
+}
+
+#nameRight{
+  top: 5px;
+  left: 330px;
+}
+
+#endingMessage{
+  display:none;
+  border-radius: 20px;
+  background-size: 100%;
+  background-image: url(img/LEFTWINS.png);
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 120px;
+  left: 120px;
+}
+/*
+#playAgain{
+  display:none;
+  background-color: rgb(226, 255, 39);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 32px;
+  position: absolute;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  top: 270px;
+  left: 170px;
+}
+  */
