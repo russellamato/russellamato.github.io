@@ -73,7 +73,6 @@ body {
   top: 10px;
   left: 285px;
 }
-
 .name {
   position: absolute;
   font-family: NFPARKLANE;
@@ -90,30 +89,60 @@ body {
   left: 330px;
 }
 
-#endingMessage{
+#endingImage{
   display:none;
-  border-radius: 20px;
+  border-radius: 10px;
   background-size: 100%;
-  background-image: url(img/LEFTWINS.png);
+  background-image: url(img/barking_spider.jpeg);
   position: absolute;
   width: 200px;
   height: 200px;
   top: 120px;
   left: 120px;
 }
-/*
+
 #playAgain{
   display:none;
-  background-color: rgb(226, 255, 39);
-  color: white;
+  background: transparent;
+  border: none;
+  color: rgb(255, 204, 0);
   text-align: center;
-  text-decoration: none;
+  font-family: NFPARKLANE;
   font-size: 32px;
   position: absolute;
   cursor: pointer;
-  width: 100px;
-  height: 50px;
-  top: 270px;
-  left: 170px;
+  height: 100px;
+  width: 200px;
+  top: 220px;
+  left: 120px;
 }
-  */
+/*
+#startFromZero{
+  background: transparent;
+  color: rgb(255, 170, 23);
+  text-align: center;
+  font-family: NFPARKLANE;
+  font-size: 32px;
+  position: absolute;
+  cursor: pointer;
+  height: 100px;
+  width: 200px;
+  top: 0x;
+  left: 10px;
+}
+*/
+#winnerMessage{
+  display:none;
+  background: transparent;
+  border: none;
+  color: rgb(255, 204, 0);
+  text-align: center;
+  font-family: NFPARKLANE;
+  font-size: 32px;
+  position: absolute;
+  cursor: pointer;
+  height: 100px;
+  width: 200px;
+  top: 220px;
+  left: 120px;
+}

@@ -1,7 +1,7 @@
 /* global $, sessionStorage */
 
 $(document).ready(runProgram); // wait for the HTML / CSS elements of the page to fully load, then execute runProgram()
-  
+
 function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   //////////////////////////// SETUP /////////////////////////////////////////////
@@ -12,10 +12,9 @@ function runProgram(){
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   const BOARD_HEIGHT = $("#board").height();
   const BOARD_WIDTH = $("#board").width();
-  const PADDLE_HEIGHT = $(".paddle").height();
-  const PADDLE_WIDTH = $(".paddle").width();
   const INITAL_SPEED = 0;
-  const POINTS_TO_WIN = 11;
+  const SCORE_TO_WIN = 2;
+  const BALL_CLASS = $(".ball")
   const HALF_BOARD_WIDTH = $("#board").width() / 2;
   const PADDLE_SPEED_UP = -5;
   const PADDLE_SPEED_DOWN = 5;
@@ -26,7 +25,6 @@ function runProgram(){
     UP: 38,
     DOWN: 40
   };
-  
 
   
 
@@ -46,19 +44,24 @@ function runProgram(){
   }
   var scoreLeft = 0;
   var scoreRight = 0;
-  var nameLeft = prompt("What is your name | Left Paddle")
-  var nameRight = prompt("What is your name | Right Paddle")
-  $("#nameLeft").text(nameLeft)
-  $("#nameRight").text(nameRight)
+  
+  var nameLeft = prompt("What is your name | Left Paddle") // prompts for the name and saves it
+  nameLeft = naming(nameLeft)
+  var nameRight = prompt("What is your name | Right Paddle") // prompts for the name and saves it
+  nameRight = naming(nameRight)
+  $("#nameLeft").text(nameLeft);
+  $("#nameRight").text(nameRight); 
+  
+  
   let paddleLeft = newObj(".paddle", "#paddleLeft") //defines the left paddle
   let paddleRight = newObj(".paddle", "#paddleRight") //defines the right paddle
-  let ball1 = newObj(".ball", "#ball1") //defines the ball
+  let ball1 = newObj(BALL_CLASS, "#ball1") //defines the ball
   // one-time setup
   let interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown); 
   $(document).on('keyup', handleKeyUp);                           // change 'eventType' to the type of event you want to handle
-   
-  
+ 
+
   startBall();
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -81,7 +84,7 @@ function runProgram(){
       bouncingOff(ball1, paddleLeft)
       bouncingOff(ball1, paddleRight)
 
-      
+      scoring(ball1)
 
     }
   
@@ -142,7 +145,7 @@ function wallCollision (obj){ // wall collision
     if (obj.y < 0) {// compares the objects y and if its less than 0 it completely stops it setting its position to where it would be right before hitting the collision
       obj.y = 0; // sets the objects y to 0 if the if is true. 
 
-      if (obj.className === ".ball"){ // checks for if the class name of the object colliding is that of ball
+      if (obj.className === BALL_CLASS){ // checks for if the class name of the object colliding is that of ball
         obj.speedY = -obj.speedY; // multiplies the objects speedY with -1 basically, it sets the objects speed to the opposite sign
       }else{
         obj.speedY = 0; //sets the objects speed on the y to 0;
@@ -154,27 +157,36 @@ function wallCollision (obj){ // wall collision
         obj.y = BOARD_HEIGHT - obj.height //sets the object's y to board height minus the objects height to give it collision
     
 
-      if (obj.className === ".ball"){ // checks for if the class name of the object colliding is that of ball
+      if (obj.className === BALL_CLASS){ // checks for if the class name of the object colliding is that of ball
           obj.speedY = -obj.speedY; // multiplies the object -1 basically, it sets the objects speed to the opposite of its self
       }else{
           obj.speedY = 0;//sets the objects speed on the y to 0;
       }
+
     } 
-    if (obj.x < 0){ // simply checks for if the ball is out on the right side and adds a point to the right side and , with a ternary operator, it checks if the amount of points to win is equal to the amount set and if so it ends the game and if not it starts it again, allowing for a amount of rounds
-      scoreRight++; // has to be first as it has to add the score, then update the number
-      $("#scoreRight").text(scoreRight)
-      scoreRight === POINTS_TO_WIN ? endGame() : startBall(); 
-    }
     
-    if (obj.x > BOARD_WIDTH){// simply checks for if the ball is out on the left side and adds a point to the left side and , with a ternary operator, it checks if the amount of points to win is equal to the amount set and if so it ends the game and if not it starts it again, allowing for a amount of rounds
-      scoreLeft++;// has to be first as it has to add the score, then update the number
-      $("#scoreLeft").text(scoreLeft)
-      scoreLeft === POINTS_TO_WIN ? endGame() : startBall(); 
-    }
 }
 
+function scoring (obj){ // separated this and wall collision as it gives more clarity even if it is more code, it handles scoring
+  if (obj.className === BALL_CLASS){
+    if (obj.x < 0){ // simply checks for if the ball is out on the right side and adds a point to the right side and , with a ternary operator, it checks if the amount of score to win is equal to the amount set and if so it ends the game and if not it starts it again, allowing for a amount of rounds
+          scoreRight++; // has to be first as it has to add the score, then update the number
+          $("#scoreRight").text(scoreRight) //sets the text to the current right score
+          scoreRight >= SCORE_TO_WIN ? endGame() : startBall(); //ternary that ends the game if the score is equal to or greater than the score to win
+    }
+        
+    if (obj.x > BOARD_WIDTH){// simply checks for if the ball is out on the left side and adds a point to the left side and , with a ternary operator, it checks if the amount of score to win is equal to the amount set and if so it ends the game and if not it starts it again, allowing for a amount of rounds
+          scoreLeft++; // has to be first as it has to add the score, then update the number
+          $("#scoreLeft").text(scoreLeft) //sets the text to the current left score
+          scoreLeft >= SCORE_TO_WIN ? endGame() : startBall(); //ternary that ends the game if the score is equal to or greater than the score to win
+    }
+  }
+  
+}
+
+
 function doCollide(a, b){ // It compares the first object and second object put into its parameters and if they are intersecting it returns true
-  return (
+  return ( 
       a.x < b.x + b.width &&
       a.x + a.width > b.x && 
       a.y < b.y + b.height &&
@@ -191,26 +203,31 @@ function moveObject(obj){//adds the speed to the position allowing for movement 
   $(obj.id).css("top", obj.y);  
 }
 
-
-
-
+function naming(name){
+    if(name.length > 7){ // checks for if the name is greater than 7 letters and if so it becomes true
+      alert("Invalid Name! Restarting Game")
+      runProgram();
+      
+    }
+    return name;
+}
+  
+  
+  
 
   function endGame() {
-    scoreLeft >= POINTS_TO_WIN ? $("#endingMessage").css("background-image", "url(img/LEFTWINS.png)").show(5000) : $("#endingMessage").css("background-image", "url(img/RIGHTWINS.png)").show(5000)
-    /*
-      This obscenely long ternary is only changing the image and showing it,
-      it does this by seeing if the score on the left is greater than the points to win and that is
-      always true when left wins so I display the left wins png while when the right wins, left doesnt
-      have enough points leading to the right wins image being displayed.
-    */
     
-    // $("#playAgain").show().on("click", $("#playAgain").text("Play Again?")) 
+
+    $("#winnerMessage").toggle(5000).text((scoreLeft >= SCORE_TO_WIN ? nameLeft : nameRight) + " WINS"); // says who won
+    $("#endingImage").toggle(5000) // displays the image at the end
+    // $("#playAgain").text("Play Again?").toggle(5000).on("click", runProgram())
     // stop the interval timer
     clearInterval(interval);
+    
     // turn off event handlers
     $(document).off();
     
   
+  
   }
-
 }
