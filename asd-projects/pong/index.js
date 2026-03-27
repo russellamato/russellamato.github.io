@@ -1,5 +1,8 @@
 /* global $, sessionStorage */
 
+
+
+
 $(document).ready(runProgram); // wait for the HTML / CSS elements of the page to fully load, then execute runProgram()
 
 function runProgram(){
@@ -7,17 +10,20 @@ function runProgram(){
   //////////////////////////// SETUP /////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  // Constant Variables
+  // Constant Variables 
+
+  //THESE VARIABLES DONT MAKE SENSE TO PUT IN A OBJECT, THEY DO NOT HAVE ENOUGH IN COMMON UNLIKE KEY
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   const BOARD_HEIGHT = $("#board").height();
   const BOARD_WIDTH = $("#board").width();
   const INITAL_SPEED = 0;
-  const SCORE_TO_WIN = 2;
+  const SCORE_TO_WIN = 11;
   const BALL_CLASS = $(".ball")
   const HALF_BOARD_WIDTH = $("#board").width() / 2;
   const PADDLE_SPEED_UP = -5;
   const PADDLE_SPEED_DOWN = 5;
+  const scoreSound = new Audio("sounds/scoreSound.mp3")
   const KEY = { // codes for keys on the keyboard
     W: 87,
     S: 83,
@@ -42,15 +48,12 @@ function runProgram(){
       
       return obj
   }
+  
+  
+  
   var scoreLeft = 0;
   var scoreRight = 0;
-  
-  var nameLeft = prompt("What is your name | Left Paddle") // prompts for the name and saves it
-  nameLeft = naming(nameLeft)
-  var nameRight = prompt("What is your name | Right Paddle") // prompts for the name and saves it
-  nameRight = naming(nameRight)
-  $("#nameLeft").text(nameLeft);
-  $("#nameRight").text(nameRight); 
+  var multiplier = 1.1;
   
   
   let paddleLeft = newObj(".paddle", "#paddleLeft") //defines the left paddle
@@ -61,6 +64,10 @@ function runProgram(){
   $(document).on('keydown', handleKeyDown); 
   $(document).on('keyup', handleKeyUp);                           // change 'eventType' to the type of event you want to handle
  
+  var nameLeft = prompt("What is your name | Left Paddle") // prompts for the name and saves it
+  var nameRight = prompt("What is your name | Right Paddle") // prompts for the name and saves it
+  $("#nameLeft").text(nameLeft);
+  $("#nameRight").text(nameRight);
 
   startBall();
   ////////////////////////////////////////////////////////////////////////////////
@@ -137,6 +144,12 @@ function bouncingOff (ball, paddle){ // cleans up code, uses a ternary and uses 
     if (doCollide(ball, paddle)){ //an if statement that handles if doCollide is true
       ball.speedX = -ball.speedX; // sets the ball's speedX the opposite of what it is.
       ball.x = paddle.x < HALF_BOARD_WIDTH ? paddle.x + paddle.width : paddle.x - paddle.width; // makes sure the ball doesnt go inside the paddle
+      
+      ball.speedX *= multiplier;
+      ball.speedY *= multiplier;
+      paddle.speedX *= multiplier;
+      paddle.speedY *= multiplier;
+      
   }
 }
 
@@ -173,12 +186,14 @@ function scoring (obj){ // separated this and wall collision as it gives more cl
           scoreRight++; // has to be first as it has to add the score, then update the number
           $("#scoreRight").text(scoreRight) //sets the text to the current right score
           scoreRight >= SCORE_TO_WIN ? endGame() : startBall(); //ternary that ends the game if the score is equal to or greater than the score to win
-    }
+          scoreSound.play();
+        }
         
     if (obj.x > BOARD_WIDTH){// simply checks for if the ball is out on the left side and adds a point to the left side and , with a ternary operator, it checks if the amount of score to win is equal to the amount set and if so it ends the game and if not it starts it again, allowing for a amount of rounds
           scoreLeft++; // has to be first as it has to add the score, then update the number
           $("#scoreLeft").text(scoreLeft) //sets the text to the current left score
           scoreLeft >= SCORE_TO_WIN ? endGame() : startBall(); //ternary that ends the game if the score is equal to or greater than the score to win
+          scoreSound.play();
     }
   }
   
@@ -203,24 +218,15 @@ function moveObject(obj){//adds the speed to the position allowing for movement 
   $(obj.id).css("top", obj.y);  
 }
 
-function naming(name){
-    if(name.length > 7){ // checks for if the name is greater than 7 letters and if so it becomes true
-      alert("Invalid Name! Restarting Game")
-      runProgram();
-      
-    }
-    return name;
-}
-  
-  
-  
+
 
   function endGame() {
     
-
+  if (scoreLeft || scoreRight >= SCORE_TO_WIN){
     $("#winnerMessage").toggle(5000).text((scoreLeft >= SCORE_TO_WIN ? nameLeft : nameRight) + " WINS"); // says who won
     $("#endingImage").toggle(5000) // displays the image at the end
-    // $("#playAgain").text("Play Again?").toggle(5000).on("click", runProgram())
+  }
+   
     // stop the interval timer
     clearInterval(interval);
     
@@ -231,3 +237,4 @@ function naming(name){
   
   }
 }
+

@@ -76,6 +76,7 @@ body {
 .name {
   position: absolute;
   font-family: NFPARKLANE;
+  color: rgb(255, 204, 0);
   font-size: 20px
 }
 
@@ -116,21 +117,8 @@ body {
   top: 220px;
   left: 120px;
 }
-/*
-#startFromZero{
-  background: transparent;
-  color: rgb(255, 170, 23);
-  text-align: center;
-  font-family: NFPARKLANE;
-  font-size: 32px;
-  position: absolute;
-  cursor: pointer;
-  height: 100px;
-  width: 200px;
-  top: 0x;
-  left: 10px;
-}
-*/
+
+
 #winnerMessage{
   display:none;
   background: transparent;
